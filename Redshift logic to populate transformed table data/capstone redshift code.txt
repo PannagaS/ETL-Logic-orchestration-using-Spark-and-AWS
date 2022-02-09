@@ -1,0 +1,34 @@
+create table result (
+  birth_date varchar(110),
+  death_date varchar(110),
+  family_name varchar(120),
+  gender varchar(110),
+  given_name varchar(130),
+  id varchar(100),
+  image varchar(100),
+  name varchar(120),
+  sort_name varchar(120),
+  area_id varchar(150),
+  end_date varchar(110),
+  legislative_period_id varchar (140),
+  on_behalf_of_id varchar(140),
+  organization_id varchar(130),
+  role varchar(120),
+  start_date varchar(140),
+  classification varchar(140),
+  org_image varchar(130),
+  org_name varchar(130),
+  seats bigint,
+  cid bigint,
+  contact_type varchar(140),
+  contact_value varchar(140),
+  cdid bigint
+)
+
+
+copy result 
+from 's3://capstone-project-input/output/output-files/' 
+credentials 'aws_iam_role=arn:aws:iam::504749057448:role/service-role/AmazonRedshift-CommandsAccessRole-20211203T183358' 
+format AS PARQUET ;
+
+select count(*) from result;
