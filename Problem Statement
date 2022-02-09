@@ -1,0 +1,5 @@
+Load the given capstone project files in S3 bucket and write the following ETL logic in Spark. Use either EMR or Glue for this. 
+First, we join persons and memberships on id and person_id. Next, join the result with orgs on org_id and organization_id.  we want and rename id to org_id before join. 
+Then, drop the redundant fields, person_id and org_id. Drop all the array columns except contact_details.
+Split the joined results into 2 tables where main table will just have Foreign key ids of the contact_details table. For ex) contact_details is an array of structs which should be loaded to a separate table with an incrementally increasing Id column and that id should be referred in the joined output. This is called as denormalization.
+Finally, write this collection into S3 first by partitioning on a suitable column that splits the data almost equally in parquet format.Then COPY the data to Redshift table by running COPY command
